@@ -1,0 +1,36 @@
+model: Simple
+outputdir: experiment/yeast/NoPretrain
+model_args:
+  backbone: MLP
+  backbone_kwargs:
+    in_dim: 103
+  n_class: 14
+  n_hidden: 1
+  out_dim: 256
+train: ../data/yeast_official_train.hdf5
+dev: ../data/yeast_official_val.hdf5
+test: ../data/yeast_official_test.hdf5
+n_epochs: 30
+iters_per_epoch: 50 # ~1500 samples in train
+dataloader_args:
+  batch_size: 32
+  num_workers: 8
+patience: 20
+criterion: BCEWithLogitsLoss
+criterion_args: {}
+saving_interval: 51
+lrp: 0.1
+optimizer: Adam
+optimizer_args:
+  lr: 0.0004
+scheduler: ReduceLROnPlateau
+scheduler_args:
+  mode: min # min for loss
+  factor: 0.1
+  patience: 2
+  cooldown: 1
+  verbose: False
+  threshold: 0.001
+transform_kwargs:
+  p: 0
+  h5: ../data/yeast_official_train.hdf5

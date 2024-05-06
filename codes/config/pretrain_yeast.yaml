@@ -1,0 +1,38 @@
+outputdir: experiment/yeast/Pretrain
+model: PretrainModel
+model_args:
+  out_dim: 256
+  cap_Q: 256
+  n_hidden: 1
+  momentum: 0.999
+  n_class: 14
+  backbone: MLP
+  backbone_kwargs:
+    in_dim: 103
+train: ../data/yeast_official_train.hdf5
+n_epochs: 150
+iters_per_epoch: 1000 # ~1500 samples in train
+dataloader_args:
+  batch_size: 64
+  num_workers: 8
+patience: 210
+criterion: WeightedSupCon # WeightedSupCon, SupCon
+criterion_args: 
+  temperature: 0.1
+saving_interval: 211
+pattern_args:
+  pattern: MulSupCon # all, any, MulSupCon
+  with_weight: False # True
+n_heads: 1
+transform_kwargs:
+  p: 0.5
+  h5: ../data/yeast_official_train.hdf5
+optimizer: Adam
+optimizer_args:
+  lr: 0.0004
+  weight_decay: 0.00001
+scheduler: CosineAnnealingWarmRestarts
+scheduler_args:
+  T_0: 50
+  T_mult: 2
+  eta_min: 0.0001
