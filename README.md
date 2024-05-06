@@ -26,7 +26,7 @@ The configuration settings are specified in the config file in `codes/config/` d
 
 We give an example of pretraining on yeast dataset. The first step is to enter the `codes/` directory and modify configuration in `config/pretrain_yeast.yaml` if necessary. Then pretrain with the following codes:
 
-```python
+```bash
 python main.py pretrain \
 --config config/pretrain_yeast.yaml \
 --is_image False # False for vector data and True for image data
@@ -39,7 +39,7 @@ By default the pretrained model will be stored in `experiment/yeast` directory
 Then we can conduct multi-label classification using pretrained model. The first step is to enter the `codes/` directory and modify configuration in `config/train_yeast.yaml` if necessary. Then train with the following codes:
 
 
-```python
+```bash
 python main.py train \
 --config config/train_yeast.yaml \
 --is_image False # False for vector data and True for image data
